@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culinary Compass</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <h1>Culinary Compass</h1>
+            <ul>
+                <li><a href="#pantry">My Pantry</a></li>
+                <li><a href="#recipes">Explore Recipes</a></li>
+                <li><a href="#meal-plan">Meal Plan</a></li>
+                <li><a href="#shopping-list">Shopping List</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="pantry">
+            <h2>My Pantry</h2>
+            <p>Enter the ingredients you have to find recipes.</p>
+            <div class="ingredient-input-container">
+                <input type="text" id="ingredient-search" placeholder="Add an ingredient...">
+                <button id="add-ingredient-btn">Add</button>
+            </div>
+            <ul id="pantry-list">
+                </ul>
+        </section>
+
+        <section id="recipes">
+            <h2>Explore Recipes</h2>
+            <div id="recipe-results">
+                <article class="recipe-card">
+                    <h3>Spaghetti Carbonara</h3>
+                    <img src="carbonara.jpg" alt="A picture of Spaghetti Carbonara">
+                    <p>Uses: Pasta, Eggs, Bacon, Parmesan</p>
+                    <button class="view-recipe-btn">View Recipe</button>
+                </article>
+            </div>
+        </section>
+
+        <section id="meal-plan">
+            <h2>Weekly Meal Plan</h2>
+            <div id="meal-plan-container">
+                <div class="day-slot">
+                    <h3>Monday</h3>
+                    <p>No meal planned yet.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="shopping-list">
+            <h2>Shopping List</h2>
+            <ul id="shopping-list-items">
+                </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Culinary Compass</p>
+    </footer>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
