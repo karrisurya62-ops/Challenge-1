@@ -1,0 +1,50 @@
+-- movies
+CREATE TABLE movies (
+  id SERIAL PRIMARY KEY,
+  tmdb_id INT UNIQUE NOT NULL,
+  title TEXT NOT NULL,
+  year INT,
+  poster_url TEXT
+);
+
+-- filming locations (point geometry)
+CREATE TABLE locations (
+  id SERIAL PRIMARY KEY,
+  movie_id INT REFERENCES movies(id) ON DELETE CASCADE,
+  name TEXT,                         -- e.g., "Victoria Terminus"
+  description TEXT,                  -- spoiler-safe text
+  lat DOUBLE PRECISION,
+  lon DOUBLE PRECISION,
+  geom GEOGRAPHY(POINT, 4326),
+  accuracy TEXT CHECK (accuracy IN ('exact','street','neighborhood','city')),
+  source TEXT,                       -- wikipedia url, article, etc.
+  created_by UUID,                   -- user id
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- user uploads
+CREATE TABLE photos (
+  id SERIAL PRIMARY KEY,
+  location_id INT REFERENCES locations(id) ON DELETE CASCADE,
+  user_id UUID NOT NULL,
+  image_url TEXT NOT NULL,
+  taken_at DATE,
+  approved BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- itineraries
+CREATE TABLE itineraries (
+  id SERIAL PRIMARY KEY,
+  user_id UUID NOT NULL,
+  name TEXT NOT NULL,
+  city TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE itinerary_stops (
+  itinerary_id INT REFERENCES itineraries(id) ON DELETE CASCADE,
+  location_id INT REFERENCES locations(id),
+  position INT,
+  PRIMARY KEY (itinerary_id, location_id)
+);
